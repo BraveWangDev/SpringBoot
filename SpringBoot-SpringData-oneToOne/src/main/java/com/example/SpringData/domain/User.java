@@ -31,14 +31,14 @@ public class User {
 
     /**
      * @OneToOne：一对一关联
-     * cascade：级联,它可以有五个值可选,分别是：
+     * cascade：级联配置
      * CascadeType.PERSIST: 级联新建
      * CascadeType.REMOVE : 级联删除
      * CascadeType.REFRESH: 级联刷新
      * CascadeType.MERGE  : 级联更新
      * CascadeType.ALL    : 以上全部四项
      * @JoinColumn:主表外键字段
-     * cid：Care所映射的表中的一个字段
+     * cid：Care所映射的表中的一个字段(会在User表创建一个cid字段,与Care外键关系)
      */
     @OneToOne(cascade = CascadeType.REFRESH)//使用CascadeType.ALL无法保存成功
     @JoinColumn(name = "cid", unique=true)

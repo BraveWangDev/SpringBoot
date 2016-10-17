@@ -31,12 +31,10 @@ public class oneToOneTest {
         // 创建测试数据
         careRepository.save(new Card(1, "aaabbbccc"));
 
-        //正向保存
+        //保存
         Card care1 = new Card();
         care1.setCardId(1);
         userRepository.save(new User("Test1", 20, care1));
-
-        //反向保存...
 
         //正向取数
         User user = userRepository.findByName("Test1");

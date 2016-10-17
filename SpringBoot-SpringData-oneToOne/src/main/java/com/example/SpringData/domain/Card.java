@@ -6,7 +6,6 @@ import javax.persistence.*;
  * Created by Brave on 16/10/13.
  */
 @Entity
-@Table
 public class Card {
 
     public Card() {
@@ -27,11 +26,9 @@ public class Card {
 
     /**
      * @OneToOne：一对一关联
-     * mappedBy = "card"：意思是说这里的一对一配置参考了card
-     * card又是什么呢?card是Person类中的getCard(),注意不是Person类中的
-     * card属性,Person类中的OneToOne配置就是在getCard()方法上面配的.
-     * 如果Person类中的getCard()方法改成getIdCard(),其他不变的话,
-     * 这里就要写成：mappedBy = "idCard"
+     * mappedBy = "card"：一对一配置参考了card
+     * mappedBy = "card"中的User类中的getCard()中的Care(去除get)
+     * 如果User类getCard()改为getIdCard(),这里就要写成：mappedBy = "idCard"
      */
     @OneToOne(mappedBy = "card", fetch=FetchType.EAGER)
     private User user;
