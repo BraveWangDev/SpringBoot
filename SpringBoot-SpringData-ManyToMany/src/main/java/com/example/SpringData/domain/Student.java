@@ -1,7 +1,6 @@
 package com.example.SpringData.domain;
 
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,15 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 
-/**
- * @author GERRARD
- * @ClassName: Student.java
- * @Description: 学生
- * @date 2015年1月27日下午1:55:30
- */
 @Entity
 @Table(name = "student")
 public class Student {
@@ -47,17 +39,17 @@ public class Student {
         return pid;
     }
 
-    @Column(name = "student_name", length = 64)
+    @Column(name = "student_name", unique = true, length = 64)
     public String getStudentName() {
         return studentName;
     }
 
     /**
-     * Hibernate 会自动创建一张关系表stu_cou， 里边有俩字段stu_id和cou_id
+     * Hibernate 会自动创建一张关系表stu_cou， 里边有俩字段stu_id和cou_id分别为两表主键
      *
      * @return
      */
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "stu_cou", joinColumns = {@JoinColumn(name = "stu_id")}, inverseJoinColumns = {@JoinColumn(name = "cou_id")})
     public Set<Course> getCourse() {
         return course;
