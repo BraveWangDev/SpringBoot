@@ -8,14 +8,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Configuration          // 配置文件
+@EnableWebSecurity      // 开启Security
+@EnableGlobalMethodSecurity(prePostEnabled = true)  //AOP
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //路由策略和访问权限的简单配置
         http
             .formLogin()                        //启用默认登陆页面
             .failureUrl("/login?error")         //登陆失败返回URL:/login?error
@@ -25,7 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         super.configure(http);
     }
 
-    //配置内存用户
+    /**
+     * 配置内存用户
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
